@@ -39,24 +39,24 @@ export const routes = [
       description: `Xem phim ${DESC_SUFFIX}`,
     },
   },
-  // {
-  //   path: "/tv/:id",
-  //   name: "tv",
-  //   Component: TVInfo,
-  //   metaInfo: {
-  //     title: `tv ${TITLE_SUFFIX}`,
-  //     description: `tv ${DESC_SUFFIX}`,
-  //   },
-  // },
-  // {
-  //   path: "/tv/:id/watch",
-  //   name: "TVWatch",
-  //   Component: TVWatch,
-  //   metaInfo: {
-  //     title: `TVWatch ${TITLE_SUFFIX}`,
-  //     description: `TVWatch ${DESC_SUFFIX}`,
-  //   },
-  // },
+  {
+    path: "/tv/:id",
+    name: "tv",
+    Component: TVInfo,
+    metaInfo: {
+      title: `tv ${TITLE_SUFFIX}`,
+      description: `tv ${DESC_SUFFIX}`,
+    },
+  },
+  {
+    path: "/tv/:id/watch",
+    name: "TVWatch",
+    Component: TVWatch,
+    metaInfo: {
+      title: `TVWatch ${TITLE_SUFFIX}`,
+      description: `TVWatch ${DESC_SUFFIX}`,
+    },
+  },
   {
     path: "explore",
     name: "explore",
