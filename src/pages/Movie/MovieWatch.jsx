@@ -8,8 +8,6 @@ const MovieWatch = () => {
   const { id } = useParams();
   const { data, error } = useQuery(["watchMovie", id], () => getWatchMovie(id));
 
-  console.log("data ", data);
-  
   // if (error) return <div>ERROR: {error.message}</div>;
   if (error) return <Error />;
 

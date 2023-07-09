@@ -70,3 +70,44 @@ export const object2Array = (obj) => {
   }
   return Object.entries(obj);
 };
+
+export const createFriendlyNameURL = (input) => {
+  if (!input) {
+    return input;
+  }
+
+  let friendlyName = input
+    ?.toString()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/đ/g, "d")
+    .replace(/Đ/g, "D");
+
+  // Remove special characters and spaces
+  let cleanedName = friendlyName.replace(/[^\w\s]/gi, "");
+
+  // Convert to lowercase
+  cleanedName = cleanedName.toLowerCase();
+
+  // Replace spaces with hyphens
+  cleanedName = cleanedName.replace(/\s+/g, "-");
+
+  // Encode the resulting string
+  const friendlyURL = encodeURI(cleanedName);
+
+  return friendlyURL;
+};
+
+export const getMovieUrl = (film, name) => {
+  if (name) {
+    return `/movie/${createFriendlyNameURL(name)}/${film.id}`;
+  }
+  return `/movie/${createFriendlyNameURL(film?.title) || createFriendlyNameURL(film?.name)}/${film.id}`;
+};
+
+export const getMovieDetailUrl = (film, name) => {
+  if (name) {
+    return `/movie/${createFriendlyNameURL(name)}/${film.id}/watch`;
+  }
+  return `/movie/${createFriendlyNameURL(film?.title) || createFriendlyNameURL(film?.name)}/${film.id}/watch`;
+};

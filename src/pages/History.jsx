@@ -13,7 +13,14 @@ const History = () => {
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
-    if (!currentUser) return;
+    if (!currentUser) {
+      const RECENTLY_WATCH_KEY = "recentlyWatch";
+      const localStorageRecentlyWatches = localStorage.getItem(RECENTLY_WATCH_KEY);
+      let recentlyWatches = JSON.parse(localStorageRecentlyWatches) ?? [];
+      setRecentlyWatchFilms(recentlyWatches);
+      setIsLoading(false);
+      return;
+    }
 
     const unsubDoc = onSnapshot(
       doc(db, "users", currentUser?.uid),

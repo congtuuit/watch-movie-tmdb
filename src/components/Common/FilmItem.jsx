@@ -1,11 +1,11 @@
 import { AiFillStar } from "react-icons/ai";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link } from "react-router-dom";
-import { resizeImage } from "../../shared/utils";
+import { getMovieUrl, resizeImage } from "../../shared/utils";
 
 const FilmItem = ({ item }) => {
   return (
-    <Link to={item.media_type === "movie" ? `/movie/${item.id}` : item.media_type === "tv" ? `/tv/${item.id}` : `/`}>
+    <Link to={item.media_type === "movie" ? getMovieUrl(item) : item.media_type === "tv" ? `/tv/${item.id}` : `/`}>
       <div className="shadow-sm bg-dark-darken pb-2 rounded-md overflow-hidden hover:scale-105 hover:brightness-110 transition duration-300 relative group">
         <LazyLoadImage
           alt="Poster film"

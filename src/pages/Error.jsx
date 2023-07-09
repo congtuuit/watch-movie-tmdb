@@ -14,7 +14,7 @@ const Error = () => {
           className="fixed top-0 left-0 min-h-screen min-w-full -z-10 object-cover"
         >
           <source
-            src="https://raw.githubusercontent.com/fuocy/video/master/Studio%20Project%20%E2%80%94%20Kapwing.mp4"
+            src="https://raw.githubusercontent.com/congtuuit/resources/master/videos/vecteezy_hacking-a-computer-system-in-a-dark-office_13417432_368.mp4"
             type="video/mp4"
           />
         </video>

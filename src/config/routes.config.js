@@ -7,6 +7,7 @@ import Search from "../pages/Search";
 import TVInfo from "../pages/TV/TVInfo";
 import TVWatch from "../pages/TV/TVWatch";
 import About from "../pages/About";
+import History from "../pages/History";
 
 const DESC_SUFFIX = "description - length <= 160 chars.";
 const TITLE_SUFFIX = "| Hot TV-Show/Movie Watching Website";
@@ -21,12 +22,21 @@ export const routes = [
     },
   },
   {
-    path: "/movie/:id",
-    name: "movie",
+    path: "/movie/:name/:id",
+    name: "Phim",
     Component: MovieInfo,
     metaInfo: {
-      title: `movie ${TITLE_SUFFIX}`,
-      description: `movie ${DESC_SUFFIX}`,
+      title: `Phim ${TITLE_SUFFIX}`,
+      description: `Phim ${DESC_SUFFIX}`,
+    },
+  },
+  {
+    path: "/movie/:name/:id/watch",
+    name: "Xem phim",
+    Component: MovieWatch,
+    metaInfo: {
+      title: `Xem phim ${TITLE_SUFFIX}`,
+      description: `Xem phim ${DESC_SUFFIX}`,
     },
   },
   // {
@@ -38,15 +48,6 @@ export const routes = [
   //     description: `tv ${DESC_SUFFIX}`,
   //   },
   // },
-  {
-    path: "/movie/:id/watch",
-    name: "MovieWatch",
-    Component: MovieWatch,
-    metaInfo: {
-      title: `MovieWatch ${TITLE_SUFFIX}`,
-      description: `MovieWatch ${DESC_SUFFIX}`,
-    },
-  },
   // {
   //   path: "/tv/:id/watch",
   //   name: "TVWatch",
@@ -74,24 +75,24 @@ export const routes = [
       description: `search ${DESC_SUFFIX}`,
     },
   },
-  {
-    path: "auth",
-    name: "auth",
-    Component: Auth,
-    metaInfo: {
-      title: `Auth ${TITLE_SUFFIX}`,
-      description: `auth ${DESC_SUFFIX}`,
-    },
-  },
-  {
-    path: "/about",
-    name: "About",
-    Component: About,
-    metaInfo: {
-      title: `About ${TITLE_SUFFIX}`,
-      description: `About ${DESC_SUFFIX}`,
-    },
-  },
+  // {
+  //   path: "auth",
+  //   name: "auth",
+  //   Component: Auth,
+  //   metaInfo: {
+  //     title: `Auth ${TITLE_SUFFIX}`,
+  //     description: `auth ${DESC_SUFFIX}`,
+  //   },
+  // },
+  // {
+  //   path: "/about",
+  //   name: "About",
+  //   Component: About,
+  //   metaInfo: {
+  //     title: `About ${TITLE_SUFFIX}`,
+  //     description: `About ${DESC_SUFFIX}`,
+  //   },
+  // },
 ];
 
 export const getRouteMetaInfo = (name) => {

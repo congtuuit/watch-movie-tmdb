@@ -5,12 +5,11 @@ import { Link } from "react-router-dom";
 import { Autoplay, Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useCurrentViewportView } from "../../hooks/useCurrentViewportView";
-import { resizeImage } from "../../shared/utils";
+import { createFriendlyNameURL, getMovieUrl, resizeImage } from "../../shared/utils";
 import Skeleton from "../Common/Skeleton";
 
 const BannerSlider = ({ films, dataDetail, isLoadingBanner }) => {
   const { isMobile } = useCurrentViewportView();
-
   return (
     <div className="mt-6 relative h-0 md:pb-[45%] pb-[55%] tw-banner-slider">
       {isLoadingBanner ? (
@@ -25,7 +24,7 @@ const BannerSlider = ({ films, dataDetail, isLoadingBanner }) => {
         >
           {films.map((film, index) => (
             <SwiperSlide key={film.id}>
-              <Link to={film.media_type === "movie" ? `/movie/${film.id}` : `/tv/${film.id}`} className="group">
+              <Link to={film.media_type === "movie" ? getMovieUrl(film, dataDetail?.[index].translation[0]) : `/tv/${film.id}`} className="group">
                 <LazyLoadImage src={resizeImage(film.backdrop_path, "w1280")} alt="Backdrop image" effect="blur" />
 
                 <div className="absolute top-0 left-0 w-full h-full rounded-lg pointer-events-none tw-black-backdrop group-hover:bg-[#00000026] transition duration-700"></div>

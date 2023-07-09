@@ -120,8 +120,7 @@ const FilmDetail = (props) => {
       <ToastContainer />
 
       <div className="flex flex-col md:flex-row">
-        {!isMobile && <SidebarMini />}
-        {isMobile && <Sidebar onCloseSidebar={() => setIsSidebarActive(false)} isSidebarActive={isSidebarActive} />}
+        <Sidebar onCloseSidebar={() => setIsSidebarActive(false)} isSidebarActive={isSidebarActive} />
 
         <div className="flex-grow min-h-screen">
           {/* BACKDROP AND GENERAL INFORMATION */}

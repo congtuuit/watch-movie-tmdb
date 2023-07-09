@@ -7,7 +7,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link } from "react-router-dom";
 import { useCurrentViewportView } from "../../hooks/useCurrentViewportView";
 import { db } from "../../shared/firebase";
-import { embedMovie, embedTV, resizeImage } from "../../shared/utils";
+import { embedMovie, embedTV, getMovieUrl, resizeImage } from "../../shared/utils";
 import { useAppSelector } from "../../store/hooks";
 import ReadMore from "../Common/ReadMore";
 import RightbarFilms from "../Common/RightbarFilms";
@@ -25,9 +25,12 @@ const FilmWatch = ({ detail, recommendations, detailSeasons, media_type, seasonI
   const [isSidebarActive, setIsSidebarActive] = useState(false);
 
   useEffect(() => {
-    if (!currentUser) return;
     if (!detail) return; // prevent this code from storing undefined value to Firestore (which cause error)
+    if (!currentUser) {
+      return;
+    }
 
+    // save to firebase
     getDoc(doc(db, "users", currentUser.uid)).then((docSnap) => {
       const isAlreadyStored = docSnap.data()?.recentlyWatch.some((film) => film.id === detail?.id);
 
@@ -100,9 +103,7 @@ const FilmWatch = ({ detail, recommendations, detailSeasons, media_type, seasonI
       </div>
 
       <div className="flex flex-col md:flex-row">
-        {!isMobile && <SidebarMini />}
-        {isMobile && <Sidebar onCloseSidebar={() => setIsSidebarActive(false)} isSidebarActive={isSidebarActive} />}
-
+        <Sidebar onCloseSidebar={() => setIsSidebarActive(false)} isSidebarActive={isSidebarActive} />
         <div className="flex-grow px-[2vw] md:pt-11 pt-0">
           <div className="relative h-0 pb-[56.25%]">
             {!detail && <Skeleton className="absolute top-0 left-0 w-full h-full rounded-sm" />}
@@ -123,7 +124,7 @@ const FilmWatch = ({ detail, recommendations, detailSeasons, media_type, seasonI
                 {detail && (
                   <h1 className="text-white md:text-3xl text-xl font-medium">
                     <Link
-                      to={media_type === "movie" ? `/movie/${detail.id}` : `/tv/${detail.id}`}
+                      to={media_type === "movie" ? getMovieUrl(detail) : `/tv/${detail.id}`}
                       className="hover:brightness-75 transition duration-300"
                     >
                       {detail.title || detail.name}
